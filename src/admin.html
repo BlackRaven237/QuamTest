@@ -1,0 +1,29 @@
+// Fonction pour charger et afficher les messages
+function chargerMessages() {
+    fetch('backend/get_messages.php')
+    .then(response => response.json())
+    .then(messages => {
+        const tableBody = document.querySelector('#tableau-messages tbody');
+        tableBody.innerHTML = ''; // On vide le tableau avant d'insérer
+
+        // Boucle sur chaque message reçu du PHP
+        messages.forEach(msg => {
+            const ligne = `
+                <tr>
+                    <td>${msg.date}</td>
+                    <td>${msg.nom}</td>
+                    <td>${msg.sujet}</td>
+                    <td>
+                        <button onclick=`lireMessage(${msg.id})`>[Lire]</button>
+                        <button onclick=`supprimerMessage(${msg.id})`>[Supprimer]</button>
+                    </td>
+                </tr>
+            `;
+            tableBody.insertAdjacentHTML('beforeend', ligne);
+        });
+    })
+    .catch(error => console.error('Erreur au chargement :', error));
+}
+
+// Appeler la fonction au chargement de la page admin
+document.addEventListener('DOMContentLoaded', chargerMessages);

@@ -16,6 +16,28 @@ function renderServices(services) {
             <p>${service.description}</p>
         </div>
     `).join('');
+
+    
+    document.getElementById('votre-id-formulaire').addEventListener('submit', function(e) {
+    e.preventDefault(); // Empêche le rechargement de la page
+
+    const donnéesFormulaire = new FormData(this);
+
+    // Envoi des données vers le dossier server qui est juste à côté
+    fetch('server/contact.php', )
+
+    .then(reponse => reponse.json())
+    .then(data => {
+        if(data.success) {
+            alert('Message envoyé avec succès !');
+            this.reset(); // Vide les champs du formulaire
+        } else {
+            alert('Erreur : ' + data.message);
+        }
+    })
+    .catch(erreur => console.error('Erreur réseau :', erreur));
+});
+
 }
 
 // Simulating CRUD API fetch on load

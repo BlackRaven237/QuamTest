@@ -1,4 +1,7 @@
 <?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+
 /**
  * ============================================================
  * FONCTIONNALITE 3 : FORMULAIRE DE CONTACT
@@ -14,6 +17,30 @@
  */
 
 // On indique que la reponse sera du JSON
+
+
+// server/contact.php
+
+// 1. On appelle le fichier de connexion créé juste au-dessus
+require_once 'config.php'; 
+
+// 2. On récupère et vérifie les données envoyées par le JavaScript
+if (isset($_POST['Nom'], $_POST['Email'], $_POST['Message'])) {
+    try {
+        // La variable $pdo provient du fichier config.php inclus automatiquement
+        $stmt = $pdo->prepare("INSERT INTO messages (nom, email, corps, date) VALUES (?, ?, ?, NOW())");
+        $stmt->execute([$_POST['Nom'], $_POST['Email'], $_POST['Message']]);
+
+        // On renvoie une réponse positive au JavaScript
+        echo json_encode(['success' => true]);
+    } catch (PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur de sauvegarde SQL : ' . $e->getMessage()]);
+    }
+} else {
+    echo json_encode(['success' => false, 'message' => 'Données du formulaire manquantes ou incomplètes.']);
+}
+
+
 header('Content-Type: application/json; charset=utf-8');
 
 // On inclut le fichier de connexion a la base de donnees
