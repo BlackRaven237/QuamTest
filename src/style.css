@@ -175,17 +175,12 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.05);
 }
 
-.card-icon {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(37, 99, 235, 0.1);
+.material-symbols-outlined {    
     color: var(--primary);
-    border-radius: 10px;
-    display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.2rem;
-    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+    font-size: 5rem;
     font-weight: bold;
 }
 
