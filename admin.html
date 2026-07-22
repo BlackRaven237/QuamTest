@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Administrateur - Freelance</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body>
+
+    <!-- ============================================================ -->
+    <!-- BLOC 1 : FORMULAIRE DE CONNEXION (fonctionnalite 4)           -->
+    <!-- Affiche par defaut. Cache une fois la connexion reussie.      -->
+    <!-- ============================================================ -->
+    <div id="bloc-connexion" class="login-box">
+        <h2>Connexion administrateur</h2>
+        <form id="formConnexion">
+            <div class="form-group">
+                <label for="email-connexion">Email</label>
+                <input type="email" id="email-connexion" required placeholder="admin@exemple.com">
+            </div>
+            <div class="form-group">
+                <label for="mdp-connexion">Mot de passe</label>
+                <input type="password" id="mdp-connexion" required placeholder="Mot de passe">
+            </div>
+            <button type="submit" class="btn-primary submit-btn">SE CONNECTER</button>
+            <div id="statut-connexion" style="margin-top:1rem;"></div>
+        </form>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOC 2 : TABLEAU DE BORD ADMIN (disposition inspiree de la maquette) -->
+    <!-- Sidebar a gauche + barre superieure + contenu, comme un vrai dashboard -->
+    <!-- ============================================================ -->
+    <div id="bloc-dashboard" class="admin-layout hidden">
+
+        <!-- ============== SIDEBAR (menu de gauche, comme sur la maquette) ============== -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <span class="material-symbols-outlined">terminal</span>
+                Freelance <span>Admin</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="#" class="admin-nav-link active" data-target="all">
+                    <span class="material-symbols-outlined">space_dashboard</span>
+                    Tableau de Bord
+                </a>
+                <a href="#" class="admin-nav-link" data-target="section-services">
+                    <span class="material-symbols-outlined">home_repair_service</span>
+                    Services
+                </a>
+                <a href="#" class="admin-nav-link" data-target="section-messages">
+                    <span class="material-symbols-outlined">mail</span>
+                    Messages
+                </a>
+                <!-- "Parametres" figure sur la maquette mais n'est pas demande par le -->
+                <!-- cahier des charges : lien present pour respecter la disposition, -->
+                <!-- volontairement inactif (aucune fonctionnalite requise derriere). -->
+                <a href="#" class="admin-nav-link disabled">
+                    <span class="material-symbols-outlined">settings</span>
+                    Paramètres
+                </a>
+            </nav>
+        </aside>
+
+        <!-- ============== CONTENU PRINCIPAL ============== -->
+        <div class="admin-main">
+
+            <!-- ============== BARRE SUPERIEURE (comme sur la maquette) ============== -->
+            <header class="admin-topbar">
+                <h2>Tableau de bord</h2>
+                <div class="admin-profile">
+                    <span id="admin-profil-nom">
+                        <span class="material-symbols-outlined">account_circle</span>
+                        Profil
+                    </span>
+                    <button id="btnDeconnexion" class="btn-secondary">
+                        <span class="material-symbols-outlined">logout</span>
+                        Déconnexion
+                    </button>
+                </div>
+            </header>
+
+            <!-- ==================== GESTION DES SERVICES (fonctionnalite 2/4) ==================== -->
+            <section id="section-services" class="admin-section">
+                <div class="admin-section-header">
+                    <h3>Gestion des services</h3>
+                    <button type="button" id="btnNouveauService" class="btn-primary">
+                        <span class="material-symbols-outlined">add</span>
+                        AJOUTER UN SERVICE
+                    </button>
+                </div>
+
+                <!-- Un seul formulaire sert a la fois pour AJOUTER et MODIFIER -->
+                <!-- Cache par defaut, affiche au clic sur "Ajouter un service" ou "Modifier" -->
+                <form id="formService" class="service-form hidden">
+                    <input type="hidden" id="service-id" value="">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="service-nom">Nom du service</label>
+                            <input type="text" id="service-nom" required placeholder="Ex : Developpement Web">
+                        </div>
+                        <div class="form-group">
+                            <label for="service-prix">Prix (FCFA)</label>
+                            <input type="number" id="service-prix" required min="0" step="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="service-description">Description</label>
+                        <textarea id="service-description" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" id="btnSubmitService">AJOUTER LE SERVICE</button>
+                    <button type="button" class="btn-secondary" id="btnAnnulerModif">Annuler</button>
+                    <div id="statut-service" style="margin-top:1rem;"></div>
+                </form>
+
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Titre</th>
+                            <th>Prix</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableau-services">
+                        <!-- Rempli dynamiquement par admin.js -->
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ==================== CONSULTATION DES MESSAGES (fonctionnalite 4) ==================== -->
+            <section id="section-messages" class="admin-section">
+                <div class="admin-section-header">
+                    <h3>Gestion des messages</h3>
+                </div>
+
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Nom</th>
+                            <th>Sujet</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableau-messages">
+                        <!-- Rempli dynamiquement par admin.js -->
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance</title>
+
+    <!-- Google Fonts for modern typography -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon"></div>
+            Freelance
+        </a>
+        <ul class="nav-links">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <!-- Fonctionnalite 1 : "welcome" et "titre" sont remplis dynamiquement -->
+    <!-- via backend/accueil.php (voir assets/js/script.js). Le texte -->
+    <!-- ci-dessous ne sert que de contenu de secours si le backend est injoignable. -->
+    <section id="accueil" class="hero">
+        <span class="welcome" id="hero-welcome">Bienvenue !</span>
+        <h1 id="hero-titre">FREELANCE GÉNIE LOGICIEL</h1>
+        <a href="#contact" class="btn-primary">ME CONTACTER</a>
+    </section>
+
+    <!-- SERVICES -->
+    <!-- Fonctionnalite 2 : la liste des services est chargee dynamiquement -->
+    <!-- depuis backend/services.php (voir assets/js/script.js) -->
+    <section id="services" class="services-section">
+        <h2 class="section-title">NOS SERVICES</h2>
+        <div class="services-grid" id="services-container">
+            <!-- Les cartes de services sont injectees ici par script.js -->
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <!-- Fonctionnalite 3 : formulaire relie a backend/contact.php (voir script.js) -->
+    <section id="contact" class="contact-section">
+        <h2 class="section-title">CONTACT</h2>
+        <!-- Coordonnees du freelance, remplies dynamiquement depuis accueil.php -->
+        <p class="coordonnees" id="coordonnees"></p>
+        <form class="contact-form" id="contactForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" required placeholder="Votre nom">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="nom@exemple.com">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="telephone">Téléphone</label>
+                    <input type="tel" id="telephone" placeholder="Optionnel">
+                </div>
+                <div class="form-group">
+                    <label for="sujet">Sujet</label>
+                    <input type="text" id="sujet" required placeholder="Objet de votre message">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" required placeholder="Écrivez votre message ici..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary submit-btn">ENVOYER</button>
+            <div id="form-status"></div>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Freelance. Tous droits réservés.</p>
+        <p><a href="admin.html">Espace administrateur</a></p>
+    </footer>
+
+    <!-- JS  -->
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
